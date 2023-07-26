@@ -4433,9 +4433,15 @@ var $elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 			return 3;
 	}
 };
+var $elm$core$Debug$toString = _Debug_toString;
+var $author$project$Main$bottlesOf = F2(
+	function (contents, amount) {
+		return $elm$core$Debug$toString(amount) + (' bottles of ' + (contents + ' on the wall.'));
+	});
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $author$project$Main$main = $elm$html$Html$text('Hello, Elm!');
+var $author$project$Main$main = $elm$html$Html$text(
+	A2($author$project$Main$bottlesOf, 'rum', 99));
 _Platform_export({'Main':{'init':_VirtualDom_init($author$project$Main$main)(0)(0)}});}(this));
 
   var app = Elm.Main.init({ node: document.getElementById("elm") });
