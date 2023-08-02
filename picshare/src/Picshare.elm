@@ -8,10 +8,15 @@ import Html.Events exposing ( onClick, onInput, onSubmit )
 import Http
 import Json.Decode exposing (Decoder, bool, int, list, string, succeed)
 import Json.Decode.Pipeline exposing (hardcoded, required)
+import WebSocket
 
 baseUrl : String
 baseUrl =
     "http://localhost:5000/"
+
+wsUrl : String
+wsUrl =
+    "ws://localhost:5000/"
 
 type alias Id =
     Int
@@ -38,6 +43,7 @@ type Msg
     | UpdateComment Id String
     | SaveComment Id
     | LoadFeed (Result Http.Error Feed)
+    | LoadStreamPhoto String
 
 photoDecoder : Decoder Photo
 photoDecoder =
@@ -95,10 +101,15 @@ update msg model =
             )
         LoadFeed (Ok feed) ->
             ( { model | feed = Just feed }
-            , Cmd.none
+            , WebSocket.listen wsUrl
             )
         LoadFeed (Err error) ->
             ( { model | error = Just error }, Cmd.none )
+        LoadStreamPhoto data ->
+            let
+                _ = Debug.log "WebSocket data" data
+            in
+            (model, Cmd.none)
 
 toggleLike : Photo -> Photo
 toggleLike photo =
@@ -122,11 +133,6 @@ updatePhotoById updatePhoto id feed =
 updateFeed : (Photo -> Photo) -> Id -> Maybe Feed -> Maybe Feed
 updateFeed updatePhoto id maybeFeed =
     Maybe.map (updatePhotoById updatePhoto id) maybeFeed
-       
-
-subscriptions : Model -> Sub Msg
-subscriptions model =
-    Sub.none
 
 saveNewComment : Photo -> Photo
 saveNewComment photo =
@@ -141,6 +147,10 @@ saveNewComment photo =
                    | comments = photo.comments ++ [ comment ]
                    , newComment = ""
              }
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    WebSocket.receive LoadStreamPhoto
 
 viewLoveButton : Photo -> Html Msg
 viewLoveButton photo =
