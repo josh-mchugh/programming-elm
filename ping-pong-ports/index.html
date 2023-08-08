@@ -7,7 +7,21 @@
     <title>Vite App</title>
   </head>
   <body>
-    <div id="content"></div>
-    <script type="module" src="/main.js"></script>
+      <div id="pingContent"></div>
+      <div id="pongContent">
+          <button id="pongBtn">Pong</div>
+          <div id="pongCount">0</div>
+      </div>
+      <script type="module" src="/main.js"></script>
+      <script type="text/javascript">
+       (function() {
+           var pongBtn = document.getElementById("pongBtn");
+           pongBtn.addEventListener("click", function() {
+               var pongCount = document.getElementById("pongCount");
+               var count = Number(pongCount.innerHTML) + 1;
+               pongCount.innerHTML = count.toString();
+           });
+       })();
+      </script>
   </body>
 </html>

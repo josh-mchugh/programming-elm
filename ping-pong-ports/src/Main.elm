@@ -2,6 +2,7 @@ module Main exposing (main)
 
 import Browser
 import Html exposing (..)
+import Html.Events exposing (onClick)
 
 
 type alias Model =
@@ -20,12 +21,16 @@ init () =
 
 
 type Msg
-    = NoOp
+    = Ping
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( model, Cmd.none )
+    case msg of
+        Ping ->
+            ( { model
+                  | count = model.count + 1 }
+            , Cmd.none)
 
 
 subscriptions : Model -> Sub Msg
@@ -36,7 +41,7 @@ subscriptions model =
 view : Model -> Html Msg
 view model =
     div []
-        [ button [] [ text "Ping" ]
+        [ button [ onClick Ping ] [ text "Ping" ]
         , div [] [ text (String.fromInt model.count) ]
         ]
 
