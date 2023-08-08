@@ -1,9 +1,10 @@
-module Main exposing (main)
+port module Main exposing (main)
 
 import Browser
 import Html exposing (..)
 import Html.Events exposing (onClick)
 
+port ping : () -> Cmd msg
 
 type alias Model =
     { enabled : Bool
@@ -30,7 +31,7 @@ update msg model =
         Ping ->
             ( { model
                   | count = model.count + 1 }
-            , Cmd.none)
+            , ping ())
 
 
 subscriptions : Model -> Sub Msg
