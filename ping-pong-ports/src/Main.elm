@@ -2,9 +2,15 @@ port module Main exposing (main)
 
 import Browser
 import Html exposing (..)
+import Html.Attributes exposing (disabled)
 import Html.Events exposing (onClick)
 
+
 port ping : () -> Cmd msg
+
+
+port pong : (() -> msg) -> Sub msg
+
 
 type alias Model =
     { enabled : Bool
@@ -14,7 +20,7 @@ type alias Model =
 
 init : () -> ( Model, Cmd Msg )
 init () =
-    ( { enabled = True
+    ( { enabled = False
       , count = 0
       }
     , Cmd.none
@@ -23,6 +29,7 @@ init () =
 
 type Msg
     = Ping
+    | Pong
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -30,19 +37,33 @@ update msg model =
     case msg of
         Ping ->
             ( { model
-                  | count = model.count + 1 }
-            , ping ())
+                | enabled = not model.enabled
+                , count = model.count + 1
+              }
+            , ping ()
+            )
+
+        Pong ->
+            ( { model
+                | enabled = not model.enabled
+              }
+            , Cmd.none
+            )
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    pong (always Pong)
 
 
 view : Model -> Html Msg
 view model =
     div []
-        [ button [ onClick Ping ] [ text "Ping" ]
+        [ button
+            [ disabled model.enabled
+            , onClick Ping
+            ]
+            [ text "Ping" ]
         , div [] [ text (String.fromInt model.count) ]
         ]
 
