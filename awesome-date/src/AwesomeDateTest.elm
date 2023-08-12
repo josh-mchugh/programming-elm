@@ -13,6 +13,7 @@ suite =
     describe "AwesomeDate"
         [ testDateParts
         , testIsLeapYear
+        , testAddYears
         ]
 
 testDateParts : Test
@@ -43,4 +44,25 @@ testIsLeapYear =
             \_ ->
                 Date.isLeapYear 2000
                     |> Expect.equal True
+        ]
+
+leapDate : Date
+leapDate =
+    Date.create 2012 2 29
+
+testAddYears : Test
+testAddYears =
+    describe "addYears"
+        [ test "changes a date's year" <|
+              \_ ->
+                  Date.addYears 2 exampleDate
+                      |> Expect.equal (Date.create 2014 6 2)
+        , test "prevents leap days on non-leap years" <|
+            \_ ->
+                Date.addYears 1 leapDate
+                    |> Expect.equal (Date.create 2013 2 28)
+        , test "allows leap days on leap years" <|
+            \_ ->
+                Date.addYears 4 leapDate
+                    |> Expect.equal (Date.create 2016 2 29)
         ]
