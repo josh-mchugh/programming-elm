@@ -12,6 +12,9 @@ The Picshare application was the introduction app into how Elm uses the Model Vi
 ![Screenshare of the Picshare application loading new images into the user feed](/demonstration/picshare-demonstration.gif)
 
 # vite-elm-app-picshare
+The vite-elm-app-picshare is a port of the Picshare application to use Vite as its web server to allow for advanced features such as hot module reload and asset and stylesheet management.  This configuration allows for neat tools such as Elm time travel functionality.
+
+![Screenshare of the Elm time travel functionality in the Picshare application](/demonstration/elm-time-travel-demonstration.gif)
 
 # ping-pong-ports
 
