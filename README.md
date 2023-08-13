@@ -19,5 +19,6 @@ The vite-elm-app-picshare is a port of the Picshare application to use Vite as i
 # ping-pong-ports
 
 # debugging
+debugging is a small project with a focus on debugging tools. There is not much visual output within the application. The focus was using Debug.toString function and handling JSON parsing errors, and using Debug.todo to stub out functionality.
 
 # awesome-date
