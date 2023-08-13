@@ -22,3 +22,4 @@ The vite-elm-app-picshare is a port of the Picshare application to use Vite as i
 debugging is a small project with a focus on debugging tools. There is not much visual output within the application. The focus was using Debug.toString function and handling JSON parsing errors, and using Debug.todo to stub out functionality.
 
 # awesome-date
+Unit tests for examples for Elm are demonstrated in this application. AwesomeDate is an Elm file which has date based logic. The AwsomeDateTest file is the unit tests associated with the AwesomeDate. It demonstrates how to create a test suite and unit tests with a focus on adding years and determining leap years.
