@@ -7,6 +7,9 @@ This small Elm application was the first demonstration of Elm from the book whic
 ![Screenshot of HTML output of elm-files program](/demonstration/elm-files-demonstration.png)
 
 # Picshare
+The Picshare application was the introduction app into how Elm uses the Model View Update. The web app uses web sockets to receive a series of images which make up a feed. Elm application receives the feed and renders the results to the browser and updates the browser with its virtual dom.
+
+![Screenshare of the Picshare application loading new images into the user feed](/demonstration/picshare-demonstration.gif)
 
 # vite-elm-app-picshare
 
