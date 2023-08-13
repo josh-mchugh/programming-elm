@@ -17,6 +17,9 @@ The vite-elm-app-picshare is a port of the Picshare application to use Vite as i
 ![Screenshare of the Elm time travel functionality in the Picshare application](/demonstration/elm-time-travel-demonstration.gif)
 
 # ping-pong-ports
+A small Elm application which demonstrates its ability to interact with JavaScript outside the application via ports. This small application has two buttons, ping and pong. When one is clicked, it becomes disabled and a counter incremented.  A message is sent to the other application which enables its button to be enabled, which, creates a simple ping pong example.
+
+![Screenshare of ping-pong-ports application functionality](/demonstration/ping-pong-ports-demonstration.gif)
 
 # debugging
 debugging is a small project with a focus on debugging tools. There is not much visual output within the application. The focus was using Debug.toString function and handling JSON parsing errors, and using Debug.todo to stub out functionality.
